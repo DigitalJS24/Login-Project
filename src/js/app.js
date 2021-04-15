@@ -1,15 +1,23 @@
-import 'bootstrap/dist/css/bootstrap.css';
 import '../css/style.css';
+import './plugins';
 import { validate } from './helpers/validate';
 
-import UI from './config/ui.config';
+import { UI } from './config/ui.config';
 import { showInputError, removeInputError } from './views/form';
-import { login } from './services/auth.service';
+import { login, signIn } from './services/auth.service';
 import { notify } from './views/notification';
 import { getNews } from './services/news.service';
+import locations from './store/locations';
+import signinView from './views/signIn';
 
-const { form, inputEmail, inputPassword } = UI;
+
+
+
+
+const { form, formSignin, inputEmail, inputPassword } = UI;
 const inputs = [inputEmail, inputPassword];
+
+
 
 //events
 form.addEventListener('submit', (e) => {
@@ -20,14 +28,37 @@ form.addEventListener('submit', (e) => {
     onSubmit();
 })
 
+formSignin.addEventListener('submit', e => {
+    e.preventDefault();
+    onSubmitSignin();
+})
+
+const select = document.getElementById('country');
+select.addEventListener('change', () => {
+    signinView.cityListRender();
+})
+
+
 inputs.forEach(el => {
     el.addEventListener('focus', () => removeInputError(el));
 })
 
+
+initApp();
 //handlers
+
+
+async function initApp() {
+    await locations.init();
+    /* signinView.setAutocompleteData(locations.shortCountriesList); */
+    signinView.countriesListRender();
+    signinView.cityListRender();
+
+}
 
 async function onSubmit() {
     const isValideForm = inputs.every((el) => {
+        console.log(el);
         const isValideInput = validate(el);
         if (!isValideInput) { showInputError(el) }
         return isValideInput;
@@ -36,6 +67,31 @@ async function onSubmit() {
     try {
         await login(inputEmail.value, inputPassword.value);
         await getNews();
+        form.reset();
+        notify({ msg: 'Login success', className: 'alert-success' })
+
+    } catch (err) {
+        notify({ msg: 'Login failed', className: 'alert-danger', timeout: 3000 });
+    }
+}
+
+
+async function onSubmitSignin() {
+
+    const isValideForm = signinUI().every((el) => {
+        const isValideInput = validate(el);
+        if (!isValideInput) { showInputError(el) }
+        return isValideInput;
+    })
+    if (!isValideForm) return;
+    try {
+        const req = signinUI().reduce((acc, el) => {
+            acc[el.dataset.required] = el.value;
+            return acc;
+        }, {})
+        console.log(req);
+        await signIn(req);
+
         form.reset();
         notify({ msg: 'Login success', className: 'alert-success' })
 

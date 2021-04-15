@@ -16,3 +16,19 @@ export async function login(email, password) {
         return Promise.reject(err);
     }
 }
+/**
+ * Function signIn - make sign in request to API
+ * @param {} signin object 
+ */
+
+export async function signIn(obj) {
+    try {
+        const response = await axios.post('/auth/signup',
+            JSON.stringify(obj));
+        console.log(response)
+        return response.data;
+    } catch (err) {
+        console.log(err);
+        return Promise.reject(err);
+    }
+}

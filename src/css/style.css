@@ -1,3 +1,44 @@
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-items-center {
+    justify-items: center;
+}
+
+.align-items-start {
+    align-items: flex-start;
+}
+
+.justify-items-center {
+    justify-items: center;
+}
+
+.justify-items-between {
+    justify-content: space-between;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.mr-auto {
+    margin-right: auto;
+}
+
+.mx-auto {
+    margin-right: auto;
+    margin-right: auto;
+}
+
 .tabs-container {
     margin-left: 8rem;
 }
@@ -6,17 +47,17 @@
     height: 100vh;
 }
 
-.login-form-wrap {
+.form-wrap {
     width: 50%;
 }
 
-.login-form-wrap .form-card {
+.form-wrap .card {
     max-width: 500px;
     width: 100%;
     margin-right: 30px;
 }
 
-.login-form-wrap .form-card .card-title {
+.form-wrap .card .card-title {
     color: var(--gray);
 }
 
@@ -41,4 +82,10 @@
 
 .login-greeting-screen .login-greeting-screen-description {
     line-height: 1.4;
+}
+
+#day,
+#month,
+#year {
+    display: flex;
 }
