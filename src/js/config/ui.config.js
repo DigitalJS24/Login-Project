@@ -3,17 +3,29 @@ export const UI = {
     formSignin: document.forms['signinForm'],
     inputEmail: document.getElementById('email'),
     inputPassword: document.getElementById('password'),
-    inputSignin: document.getElementById('password'),
+    signinEmail: document.getElementById('sign-email'),
+    signinPassword: document.getElementById('sign-password'),
+    signinNickname: document.getElementById('nickname'),
+    signinFirstname: document.getElementById('firstname'),
+    signinLastname: document.getElementById('lastname'),
+    signinPhone: document.getElementById('phone'),
+    signinGender: document.getElementById('gender'),
+    signinCountry: document.getElementById('country'),
+    signinCity: document.getElementById('city'),
+    signinBirthday: document.getElementById('birthday'),
+
 };
 const elemsForm = document.querySelectorAll('.signinForm .form-control');
 
-/* export function signinUI() {
-    let signUI = [];
-    for (let i = 0; i < elemsForm.length - 1; i++) {
+export function getRequiredKeyValue() {
+    let key = {};
+    elemsForm.forEach(item => {
+        key[item.dataset.required] = item.value;
+    });
+    /* for (let i = 0; i < elemsForm.length - 3; i++) {
 
-        signUI.push(elemsForm.item(i));
-    }
-    return signUI;
-} */
+        key[elemsForm] += elemsForm.item(i).value;
+    } */
 
-/* console.log(signinUI); */
+    return key;
+}

@@ -6,12 +6,16 @@ class SigninView {
         this._form = document.forms['signinForm'];
         this.country = document.getElementById('country');
         this.city = document.getElementById('city');
+        this.birthday = document.getElementById('birthday');
     }
     get countryValue() {
         return this.country.value;
     }
     get cityValue() {
         return this.city.value;
+    }
+    get dateOfBirth() {
+        return this.birthday.value
     }
     countriesListRender() {
         locations.shortCountriesList.forEach(elem => {

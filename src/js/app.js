@@ -9,13 +9,16 @@ import { notify } from './views/notification';
 import { getNews } from './services/news.service';
 import locations from './store/locations';
 import signinView from './views/signIn';
+import signinStore from './store/signin.store';
 
 
 
 
 
-const { form, formSignin, inputEmail, inputPassword } = UI;
+const { form, formSignin, inputEmail, inputPassword, ...signinInputs } = UI;
+/* const { form, formSignin, inputEmail, inputPassword } = UI; */
 const inputs = [inputEmail, inputPassword];
+
 
 
 
@@ -46,7 +49,7 @@ inputs.forEach(el => {
 
 initApp();
 //handlers
-
+/* console.log(signinStore.getInfoFromSigninForm()); */
 
 async function initApp() {
     await locations.init();
@@ -77,22 +80,24 @@ async function onSubmit() {
 
 
 async function onSubmitSignin() {
+    console.log(signinStore.getInfoFromSigninForm());
 
-    const isValideForm = signinUI().every((el) => {
+    const isValideForm = Object.values(signinInputs).every((el) => {
         const isValideInput = validate(el);
+
         if (!isValideInput) { showInputError(el) }
         return isValideInput;
     })
     if (!isValideForm) return;
     try {
-        const req = signinUI().reduce((acc, el) => {
+        /* const req = signinUI().reduce((acc, el) => {
             acc[el.dataset.required] = el.value;
             return acc;
-        }, {})
-        console.log(req);
-        await signIn(req);
+        }, {}) */
 
-        form.reset();
+        await signIn(signinStore.getInfoFromSigninForm());
+
+        formSignin.reset();
         notify({ msg: 'Login success', className: 'alert-success' })
 
     } catch (err) {

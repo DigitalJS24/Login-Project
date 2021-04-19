@@ -68,43 +68,34 @@
                             <input class="form-control" type="text" id="phone" aria-describedby="emailHelp" placeholder="Enter email" data-required="phone" data-invalid-message="Please fill it" />
                         </div>
                         <div class="form-group">
-                            <label for="password">Gender</label>
-                            <input class="form-control" type="password" id="gender" placeholder="Password" data-required="gender" data-invalid-message="Please fill it" />
+                            <label for="gender">Gender</label>
+                            <select class="select-location form-control" name="gender" id="gender" data-required="gender_orientation" data-invalid-message="Please fill it">
+                                <option value="" disabled selected>Choose your gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label for="country">Country</label>
-                            <select class="select-location form-control" name="country" id="country">
+                            <select class="select-location" name="country" id="country" data-required="country">
                                 <option value="" disabled selected>Choose your country</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="city">City</label>
-                            <select class="select-location form-control" name="city" id="city" placeholder="City" data-required="city">
+                            <select class="select-location" name="city" id="city" placeholder="City" data-required="city">
                                 <option value="" disabled selected>Choose your city</option>
                               
                             </select>
-
                         </div>
-
-
-                        <!-- <select class="form-control autocomplete" type="text" id="autocomplete-country" data-required="country" data-invalid-message="Please fill it"> -->
-
-                        <!-- <div class="form-group input-field">
-                            <label for="autocomplete-country">Country</label>
-                            <input class="form-control autocomplete" type="text" id="autocomplete-country" data-required="country" data-invalid-message="Please fill it">
-                        </div> -->
-                        <!--         <div class="form-group input-field">
-                            <label for="autocomplete-city">City</label>
-                            <input class="form-control autocomplete" type="text" id="autocomplete-city" data-required="city" data-invalid-message="Please fill it">
-                        </div> -->
 
                         <div class="form-group ">
                             <label for="email">Date of birth</label>
-                            <input type="text" class="form-control datepicker" aria-describedby="emailHelp" placeholder="Birthday" data-required="birthday" data-invalid-message="Please fill it" />
+                            <input class=" datepicker" type="text" id="birthday" aria-describedby="emailHelp" placeholder="Birthday" data-required="birthday" data-invalid-message="Please fill it" />
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary" type="submit">Submit</button>
                     </form>
                 </div>
             </div>
